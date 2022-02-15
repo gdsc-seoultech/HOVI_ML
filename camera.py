@@ -21,16 +21,15 @@ while cap.isOpened():
 
     if len(faces) > 0:
         face = faces[0] #face가 여러 개일 때는 idx=0인 얼굴만 사용
-    else:
-        face = faces
 
-    shape = predictor(img, face)
-    shape = face_utils.shape_to_np(shape)
+        shape = predictor(img, face)
+        shape = face_utils.shape_to_np(shape)
 
-    #img = cv2.rectangle(img, pt1=(face.left(), face.top()), pt2=(face.right(), face.bottom()), color=(255,255,255), thickness=2, lineType=cv2.LINE_AA)
+        img = cv2.rectangle(img, pt1=(face.left(), face.top()), pt2=(face.right(), face.bottom()), color=(255,255,255), thickness=2, lineType=cv2.LINE_AA)
     
-    for s in shape:
-        cv2.circle(img, center=tuple(s), radius=1, color=(255,255,255), thickness=2, lineType=cv2.LINE_AA)
+        for s in shape:
+            cv2.circle(img, center=tuple(s), radius=1, color=(255,255,255), thickness=2, lineType=cv2.LINE_AA)
 
     cv2.imshow('img', img)
-    cv2.waitKey(1)
+    if cv2.waitKey(1) == ord('q'):
+        break
