@@ -3,19 +3,21 @@ import dlib
 from imutils import face_utils, resize 
 import numpy as np #행렬 처리
 
-orange_img = cv2.imread('orange.jpg')
-# orange_img = cv2.resize(orange_img, dsize=(512, 512))
+scaler = 0.3
 
 detector = dlib.get_frontal_face_detector() #얼굴 영역 탐지
 predictor = dlib.shape_predictor(r'shape_predictor_68_face_landmarks.dat')
 
-cap = cv2.VideoCapture(0) #웹캠 사용!
+cap = cv2.VideoCapture("video.mp4")
 
 while cap.isOpened():
     ret, img = cap.read() #이미지 읽어오기
 
     if not ret:
         break
+    
+    img = cv2.resize(img, (int(img.shape[1]*scaler), int(img.shape[0]*scaler)))
+    img = resize(img, width = 1000)
 
     faces = detector(img) #좌표 저장
 
@@ -52,7 +54,7 @@ while cap.isOpened():
             print("배고파")
 
         # 웃기
-        elif abs(shape[48,0] - shape[54,0]) > 145:
+        elif abs(shape[48,0] - shape[54,0]) > 135:
             print("날씨가 좋아 산책 가자")
 
         
