@@ -6,7 +6,7 @@ import numpy as np #행렬 처리
 scaler = 0.3
 
 detector = dlib.get_frontal_face_detector() #얼굴 영역 탐지
-predictor = dlib.shape_predictor(r'shape_predictor_68_face_landmarks.dat')
+predictor = dlib.shape_predictor(r'shape_predictor_68_face_landmark.dat')
 
 cap = cv2.VideoCapture(0)
 
